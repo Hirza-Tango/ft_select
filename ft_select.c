@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_select.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tango <tango@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:53:49 by tango             #+#    #+#             */
-/*   Updated: 2018/08/04 18:02:47 by tango            ###   ########.fr       */
+/*   Updated: 2018/08/08 18:36:05 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,11 @@
 
 void	init_term(void)
 {	
+	set_win_size();
 	tcgetattr(0, &g_inherit_term);
 	g_term = g_inherit_term;
 	g_term.c_lflag &= ~(ECHO | ICANON | ISIG);
 	tcsetattr(0, 0, &g_term);
-}
-
-void	redraw(int sig)
-{
-	if (sig == SIGWINCH)
-		//redraw window
-		(void)0;
-}
-
-void	reset_term(int sig)
-{
-	if (sig == SIGINT || sig == SIGTERM || sig == SIGQUIT
-	|| sig == SIGHUP || sig == SIGTSTP)
-	{
-		tcsetattr(0, 0, &g_inherit_term);
-		exit(0);
-	}
 }
 
 void	handle_char(char c)

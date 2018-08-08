@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/08 17:41:28 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/08 18:47:50 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_SELECT_H
 
 # include <libft.h>
+# include <ft_printf.h>
 
 # include <sys/ioctl.h>
 # include <termios.h>
@@ -22,8 +23,11 @@
 
 struct termios	g_inherit_term;
 struct termios	g_term;
+size_t			g_term_cols;
+size_t			g_term_lines;
+int				g_tty;
 
-enum	e_font_effects
+enum			e_font_effects
 {
 	F_NORMAL	= 0,
 	F_INV_VIDEO = 7,
@@ -49,5 +53,18 @@ enum	e_font_effects
 	F_B_WHITE	= 47,
 	F_B_DEFAULT = 49
 };
+
+typedef struct	s_entry
+{
+	char	name[255];
+	char	mode;
+}				t_entry;
+
+# define SET_POS(x,y) (tgoto("cm", x, y))
+# define SET_STYLE(x) (ft_printf("%s%zum", ESCAPE_CODE, x))
+# define CLEAR_SCREEN() (ft_putstr_fd(tgetstr("cl", NULL), g_tty))
+
+void			set_win_size(void);
+
 
 #endif
