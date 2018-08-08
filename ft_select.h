@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/08 11:57:48 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/08 17:41:28 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ enum	e_font_effects
 	F_NORMAL	= 0,
 	F_INV_VIDEO = 7,
 	F_UNDERLINE = 4,
+	F_UNDERLINE_OFF = 24,
+	F_INV_VIDEO_OFF = 27,
 	F_F_BLACK	= 30,
 	F_F_RED		= 31,
 	F_F_GREEN	= 32,
