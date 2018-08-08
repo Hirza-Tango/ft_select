@@ -3,19 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_select.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tango <tango@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/03 21:44:01 by tango            ###   ########.fr       */
+/*   Updated: 2018/08/08 11:57:48 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#ifndef FT_SELECT_H
+# define FT_SELECT_H
 
-#include <sys/ioctl.h>
-#include <termios.h>
-#include <term.h>
-#include <signal.h>
+# include <libft.h>
+
+# include <sys/ioctl.h>
+# include <termios.h>
+# include <term.h>
+# include <signal.h>
 
 struct termios	g_inherit_term;
 struct termios	g_term;
@@ -44,3 +47,5 @@ enum	e_font_effects
 	F_B_WHITE	= 47,
 	F_B_DEFAULT = 49
 };
+
+#endif
