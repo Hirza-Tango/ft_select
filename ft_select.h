@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/08 18:47:50 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/09 20:24:22 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,11 @@ typedef struct	s_entry
 }				t_entry;
 
 # define SET_POS(x,y) (tgoto("cm", x, y))
-# define SET_STYLE(x) (ft_printf("%s%zum", ESCAPE_CODE, x))
+# define SET_UNDERLINE() (ft_putstr_fd(tgetstr("us, NULL"), g_tty))
+# define UNSET_UNDERLINE() (ft_putstr_fd(tgetstr("ue, NULL"), g_tty))
+# define SET_REV_VID() (ft_putstr_fd(tgetstr("mr", NULL), g_tty))
+# define UNSET_UL_REV_VID() (ft_putstr_fd(tgetstr("me, NULL"), g_tty))
+# define SET_STYLE(x) (ft_printf("/e[%zum", x))
 # define CLEAR_SCREEN() (ft_putstr_fd(tgetstr("cl", NULL), g_tty))
 
 void			set_win_size(void);
