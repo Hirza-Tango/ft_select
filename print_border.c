@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 12:01:25 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/08 18:42:00 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/10 13:05:00 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,74 +18,73 @@ void	print_border()
 {
 	size_t i;
 	size_t j;
-	char tmp[1];
 	
 	j = 0;
 	CLEAR_SCREEN();
 	SET_POS(3, (g_term_cols - 20) / 2); //position at cen
 	SET_STYLE(F_F_BLACK);
-	printf("\e[37m"); //black
-	printf("\e[4m"); //underline
-
-	printf("FT_SELECT by dslogrov");
-	printf("\e[0m"); //reset
-	printf("\e[H"); //Cursor home
-	printf("\e[34m");
+	SET_UNDERLINE();
+	ft_putstr("FT_SELECT by dslogrov");
+	UNSET_UNDERLINE();
+	SET_STYLE(F_NORMAL);
+	/*SET_POS(1, 1);
 	while (j < 2)
 	{
-		printf("\e[35m"); //magenta
-		printf("////");
-		printf("\e[31m"); //red
+		SET_STYLE(F_F_MAGENTA);
+		ft_putstr("////");
+		SET_STYLE(F_F_RED);
 		i = 4;
-		while (i++ < g_term_cols - 4)
-			printf("-");
-		printf("\e[35m"); //magenta
-		printf("\\\\\\\\");
-		printf("\e[24m");
+		//while (i++ < g_term_cols - 4)
+		//	ft_putchar('-');
+		SET_STYLE(F_F_MAGENTA);
+		ft_putstr("\\\\\\\\");
+		SET_STYLE(F_F_DEFAULT);
 		j++;
 	}
 	while (j < g_term_lines - 2)
 	{
-		printf("\e[%zuH", j + 1); //position at left
+		SET_POS(j + 1, 1);
 		if (j == g_term_lines / 2)
 		{
-			printf("\e[33m"); //red
-			printf("<<");
+			SET_STYLE(F_F_YELLOW);
+			ft_putstr("<<");
 		}
 		else
 		{
-			printf("\e[31m"); //red
-			printf("||");
+			SET_STYLE(F_F_RED);
+			ft_putstr("||");
 		}
-		printf("\e[%zu;%zuH", j + 1, g_term_cols - 1); //position right
-		if (j == lines / 2)
+		SET_POS(j + 1, g_term_cols - 1);
+		if (j == g_term_lines / 2)
 		{
-			printf("\e[33m"); //red
-			printf(">>");
+			SET_STYLE(F_F_YELLOW);
+			ft_putstr(">>");
 		}
 		else
 		{
-			printf("\e[31m"); //red
-			printf("||");
+			SET_STYLE(F_F_RED);
+			ft_putstr("||");
 		}
 		j++;
 	}
 	while (j++ < g_term_lines)
 	{
-		printf("\e[%zuH", j);
-		printf("\e[35m"); //magenta
-		printf("\\\\\\\\");
-		printf("\e[31m"); //red
+		SET_POS(j, 1);
+		SET_STYLE(F_F_MAGENTA);
+		ft_putstr("\\\\\\\\");
+		SET_STYLE(F_F_RED);
 		i = 4;
-		while (i++ < g_term_cols - 4)
-			printf("-");
-		printf("\e[35m"); //magenta
-		printf("////");
+		//while (i++ < g_term_cols - 4)
+		//	ft_putchar('-');
+		SET_STYLE(F_F_MAGENTA);
+		ft_putstr("////");
 	}
-	printf("\e[m");
+	*/
+	SET_STYLE(F_NORMAL);
 }
 
 int main()
 {
-	print_border();
+	//tputs(tgetstr("cl", NULL), 1, ft_putchar_err);
+	//ft_putstr("\e[2J");
 }
