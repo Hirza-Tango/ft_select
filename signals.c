@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 18:21:16 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/13 14:30:24 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/13 23:02:47 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	parse_signals(void)
 {
-	const int sigs[] = {SIGINT, SIGTERM, SIGQUIT, SIGHUP, SIGTSTP, SIGWINCH, 0};
-	int i;
+	const int	sigs[] = {SIGINT, SIGTERM, SIGQUIT, SIGHUP, SIGTSTP, SIGWINCH, 0};
+	int 		i;
 
 	i = 0;
 	while (sigs[i])

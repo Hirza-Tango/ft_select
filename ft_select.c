@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:53:49 by tango             #+#    #+#             */
-/*   Updated: 2018/08/13 16:41:07 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/13 22:46:34 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_term(void)
 	tputs(tgetstr("vi", NULL), 1, ft_putchar_err);
 }
 
-void	handle_char(long c)
+void	handle_char(long c, t_listinfo *info)
 {
 	if (c == 10)
 	{
@@ -44,11 +44,11 @@ void	handle_char(long c)
 	}
 	if (c == 4283163)
 	{
-		move_up();
+		move_up(info);
 	}
 	if (c == 4348699)
 	{
-		move_down();
+		move_down(info);
 	}
 	if (c == 4479771)
 	{
@@ -89,28 +89,32 @@ t_listinfo	init_list(int argc, char **argv)
 		ent.active = 0;
 		ft_lstadd(&list, ft_lstnew(&ent, sizeof (ent)));
 	}
-	info.active_row = 0;
-	info.active_col = 0;
+	if (!list)
+	{
+		ft_putendl("No arguments given");
+		exit(0);
+	}
+	info.active = 0;
 	info.list = list;
 	info.list_length = ft_lstlen(list);
 	info.list_width = ft_listwidth(list);
-	info.left_col = 0;
 	return (info);
 }
 
 int		main(int argc, char **argv, char **env)
 {
-	long input;
+	long		input;
+	t_listinfo	info;
 
-	g_list_info = init_list(argc, argv);
+	info = init_list(argc, argv);
 	parse_signals();
 	init_term();
 	while (1)
 	{
 		print_border();
-		print_list();
+		print_list(info);
 		input = 0;
 		read(2, &input, 8);
-		handle_char(input);
+		handle_char(input, &info);
 	}
 }

@@ -12,9 +12,15 @@
 
 #include <ft_select.h>
 
-/*
-**	Sets terminal style to the given parameters
-*/
+void	set_style(char style)
+{
+	if (ft_strequ(getenv("TERM"), "xterm-256color"))
+	{
+		ft_putstr("\033[");
+		ft_putnbr(style);
+		ft_putchar('m');
+	}
+}
 
 void	set_win_size(void)
 {

@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/13 16:43:39 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/13 22:46:20 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <termcap.h>
 # include <signal.h>
 # include <sys/stat.h>
+# include <sys/types.h>
 
 typedef struct	s_entry
 {
@@ -35,9 +36,7 @@ typedef struct	s_listinfo
 	t_list	*list;
 	size_t	list_length;
 	size_t	list_width;
-	size_t	active_row;
-	size_t	active_col;
-	size_t	left_col;
+	size_t	active;
 }				t_listinfo;
 
 struct termios	g_inherit_term;
@@ -77,11 +76,11 @@ enum			e_font_effects
 # define UNSET_UNDERLINE() (tputs(tgetstr("ue", NULL), 1, ft_putchar_err))
 # define SET_REV_VID() (tputs(tgetstr("mr", NULL), 1, ft_putchar_err))
 # define UNSET_UL_REV_VID() (tputs(tgetstr("me", NULL), 1, ft_putchar_err))
-# define SET_STYLE(x) (ft_printf("\e[%zum", x))
 # define CLEAR_SCREEN() (tputs(tgetstr("cl", NULL), 1, ft_putchar_err))
 
 void			set_win_size(void);
 int				ft_putchar_err(int c);
+void			set_style(char style);
 void			init_term(void);
 void			print_border(void);
 void			parse_signals(void);
