@@ -1,45 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   term_utils.c                                       :+:      :+:    :+:   */
+/*   move_cursor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/08 17:44:36 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/13 16:42:54 by dslogrov         ###   ########.fr       */
+/*   Created: 2018/08/13 16:21:16 by dslogrov          #+#    #+#             */
+/*   Updated: 2018/08/13 16:46:06 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-/*
-**	Sets terminal style to the given parameters
-*/
-
-void	set_win_size(void)
+void	move_up(t_listinfo *info)
 {
-	struct winsize	w;
+	const size_t		rows = (g_term_lines - 8) / 2;
 
-	ioctl(2, TIOCGWINSZ, &w);
-	g_term_cols = w.ws_col;
-	g_term_lines = w.ws_row;
+	if (!info->active_row)
+		info->active_row = rows - 1;
+	else
+		info->active_row--;
 }
 
-int		ft_putchar_err(int c)
+void	move_down(t_listinfo *info)
 {
-	ft_putchar_fd((char)c, 2);
-	return (1);
+	const size_t		rows = (g_term_lines - 8) / 2;
+
+	if (info->active_row == rows - 1)
+		info->active_row = 0;
+	else
+		info->active_row++;
 }
 
-unsigned char	ft_listwidth(t_list *list)
+void	move_left(t_listinfo *t)
 {
-	size_t	ret;
-	
-	ret = 0;
-	while(list)
-	{
-		ret = MAX(ft_strlen(((t_entry *)list->content)->name), ret);
-		list = list->next;
-	}
-	return (ret);
+
+}
+
+void	move_right(t_listinfo *t)
+{
+
 }

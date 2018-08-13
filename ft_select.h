@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/10 13:02:51 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/13 16:43:39 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,29 @@
 # include <term.h>
 # include <termcap.h>
 # include <signal.h>
+# include <sys/stat.h>
+
+typedef struct	s_entry
+{
+	char	*name;
+	mode_t	mode;
+	char	active;
+}				t_entry;
+
+typedef struct	s_listinfo
+{
+	t_list	*list;
+	size_t	list_length;
+	size_t	list_width;
+	size_t	active_row;
+	size_t	active_col;
+	size_t	left_col;
+}				t_listinfo;
 
 struct termios	g_inherit_term;
 struct termios	g_term;
 size_t			g_term_cols;
 size_t			g_term_lines;
-int				g_tty;
 
 enum			e_font_effects
 {
@@ -55,12 +72,6 @@ enum			e_font_effects
 	F_B_DEFAULT = 49
 };
 
-typedef struct	s_entry
-{
-	char	name[255];
-	char	mode;
-}				t_entry;
-
 # define SET_POS(x,y) (tputs(tgoto(tgetstr("cm", NULL), x, y), 1, ft_putchar_err))
 # define SET_UNDERLINE() (tputs(tgetstr("us", NULL), 1, ft_putchar_err))
 # define UNSET_UNDERLINE() (tputs(tgetstr("ue", NULL), 1, ft_putchar_err))
@@ -71,5 +82,14 @@ typedef struct	s_entry
 
 void			set_win_size(void);
 int				ft_putchar_err(int c);
+void			init_term(void);
+void			print_border(void);
+void			parse_signals(void);
+void			signals(int sig);
+unsigned char	ft_listwidth(t_list *list);
+void			print_list();
+
+void			move_up();
+void			move_down();
 
 #endif
