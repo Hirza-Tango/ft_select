@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/13 22:46:20 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/13 23:04:20 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <termcap.h>
 # include <signal.h>
 # include <sys/stat.h>
-# include <sys/types.h>
 
 typedef struct	s_entry
 {
