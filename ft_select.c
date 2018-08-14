@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:53:49 by tango             #+#    #+#             */
-/*   Updated: 2018/08/14 14:58:37 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 16:12:52 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		init_term(void)
 			ft_putendl_fd("Error: Terminfo database could not be found", g_tty);
 		exit(1);
 	}
-	g_tty = open(ttyname(0), O_RDWR | O_NDELAY);
+	g_tty = open(ttyname(2), O_RDWR);
 	set_win_size();
 	tcgetattr(g_tty, &g_inherit_term);
 	g_term = g_inherit_term;
@@ -110,14 +110,14 @@ int			main(int argc, char **argv)
 	long		input;
 
 	g_info = init_list(argc, argv);
-	parse_signals();
 	init_term();
 	print_border();
+	parse_signals();
 	while (1)
 	{
 		print_list();
 		input = 0;
-		read(0, &input, 8);
+		read(g_tty, &input, 8);
 		handle_char(input);
 	}
 }
