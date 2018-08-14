@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/13 23:04:20 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 11:26:23 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ struct termios	g_inherit_term;
 struct termios	g_term;
 size_t			g_term_cols;
 size_t			g_term_lines;
+t_listinfo		g_info;
 
 enum			e_font_effects
 {
@@ -85,9 +86,12 @@ void			print_border(void);
 void			parse_signals(void);
 void			signals(int sig);
 unsigned char	ft_listwidth(t_list *list);
-void			print_list();
+void			print_list(void);
+void			list_toggle(void);
 
-void			move_up();
-void			move_down();
+void			move_up(void);
+void			move_down(void);
+void			move_left(void);
+void			move_right(void);
 
 #endif

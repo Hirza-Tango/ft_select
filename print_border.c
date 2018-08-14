@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 12:01:25 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/13 21:26:15 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 11:33:40 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 
 void	border_top_bottom(void)
 {
-	size_t i;
-	size_t j;
-	const int cols[4] = {0, 1, g_term_lines - 2, g_term_lines - 1};
+	size_t		i;
+	size_t		j;
+	const int	cols[4] = {0, 1, g_term_lines - 2, g_term_lines - 1};
 
 	j = 0;
 	while (j < 4)
 	{
 		SET_POS(0, cols[j]);
 		set_style(F_F_MAGENTA);
-		ft_putstr( j < 2 ? "//" : "\\\\");
+		ft_putstr(j < 2 ? "//" : "\\\\");
 		set_style(F_F_RED);
 		i = 2;
 		while (i++ < g_term_cols - 2)
@@ -39,7 +39,6 @@ void	border_top_bottom(void)
 
 void	border_left_right(void)
 {
-	size_t i;
 	size_t j;
 
 	j = 2;
@@ -56,13 +55,10 @@ void	border_left_right(void)
 	}
 }
 
-void	print_border()
+void	print_border(void)
 {
-	size_t i;
-	size_t j;
-
 	CLEAR_SCREEN();
-	SET_POS((g_term_cols - 20) / 2, 2); //position at cen
+	SET_POS((g_term_cols - 20) / 2, 2);
 	set_style(F_F_CYAN);
 	SET_UNDERLINE();
 	ft_putstr("FT_SELECT_by_dslogrov");
