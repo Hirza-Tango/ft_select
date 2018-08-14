@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:53:49 by tango             #+#    #+#             */
-/*   Updated: 2018/08/14 14:04:52 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 14:58:37 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,23 @@ void		init_term(void)
 
 	if (!terminal)
 	{
-		ft_putendl_fd("Error: TERM variable not found", 2);
+		ft_putendl_fd("Error: TERM variable not found", g_tty);
 		exit(1);
 	}
 	if ((findings = tgetent(NULL, terminal)) != 1)
 	{
 		if (!findings)
-			ft_putendl_fd("Error: No entry for TERM in terminfo database", 2);
+			ft_putendl_fd("Error: No entry for TERM in terminfo database", g_tty);
 		else if (findings < 0)
-			ft_putendl_fd("Error: Terminfo database could not be found", 2);
+			ft_putendl_fd("Error: Terminfo database could not be found", g_tty);
 		exit(1);
 	}
+	g_tty = open(ttyname(0), O_RDWR | O_NDELAY);
 	set_win_size();
-	tcgetattr(2, &g_inherit_term);
+	tcgetattr(g_tty, &g_inherit_term);
 	g_term = g_inherit_term;
 	g_term.c_lflag &= ~(ECHO | ICANON);
-	tcsetattr(2, 0, &g_term);
+	tcsetattr(g_tty, 0, &g_term);
 	tputs(tgetstr("ti", NULL), 1, ft_putchar_err);
 	tputs(tgetstr("vi", NULL), 1, ft_putchar_err);
 }
@@ -116,7 +117,7 @@ int			main(int argc, char **argv)
 	{
 		print_list();
 		input = 0;
-		read(2, &input, 8);
+		read(0, &input, 8);
 		handle_char(input);
 	}
 }

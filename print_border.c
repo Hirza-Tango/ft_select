@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 12:01:25 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/14 13:56:36 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 14:51:14 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	border_top_bottom(void)
 	{
 		SET_POS(0, cols[j]);
 		set_style(F_F_MAGENTA);
-		ft_putstr_fd(j < 2 ? "//" : "\\\\", 2);
+		ft_putstr_fd(j < 2 ? "//" : "\\\\", g_tty);
 		set_style(F_F_RED);
 		i = 2;
 		while (i++ < g_term_cols - 2)
-			ft_putchar_fd('-', 2);
+			ft_putchar_fd('-', g_tty);
 		set_style(F_F_MAGENTA);
-		ft_putstr_fd(j < 2 ? "\\\\" : "//", 2);
+		ft_putstr_fd(j < 2 ? "\\\\" : "//", g_tty);
 		set_style(F_F_DEFAULT);
 		j++;
 	}
@@ -46,11 +46,11 @@ void	border_left_right(void)
 	{
 		SET_POS(0, j);
 		set_style(F_F_RED);
-		ft_putstr_fd("||", 2);
+		ft_putstr_fd("||", g_tty);
 		set_style(F_NORMAL);
 		SET_POS(g_term_cols - 2, j);
 		set_style(F_F_RED);
-		ft_putstr_fd("||", 2);
+		ft_putstr_fd("||", g_tty);
 		j++;
 	}
 }
@@ -61,7 +61,7 @@ void	print_border(void)
 	SET_POS((g_term_cols - 20) / 2, 2);
 	set_style(F_F_CYAN);
 	SET_UNDERLINE();
-	ft_putstr_fd("FT_SELECT_by_dslogrov", 2);
+	ft_putstr_fd("FT_SELECT_by_dslogrov", g_tty);
 	UNSET_UNDERLINE();
 	set_style(F_NORMAL);
 	border_top_bottom();

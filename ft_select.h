@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/14 11:26:23 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 14:34:25 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <termcap.h>
 # include <signal.h>
 # include <sys/stat.h>
+# include <fcntl.h>
 
 typedef struct	s_entry
 {
@@ -43,6 +44,7 @@ struct termios	g_term;
 size_t			g_term_cols;
 size_t			g_term_lines;
 t_listinfo		g_info;
+int				g_tty;
 
 enum			e_font_effects
 {
@@ -77,6 +79,7 @@ enum			e_font_effects
 # define SET_REV_VID() (tputs(tgetstr("mr", NULL), 1, ft_putchar_err))
 # define UNSET_UL_REV_VID() (tputs(tgetstr("me", NULL), 1, ft_putchar_err))
 # define CLEAR_SCREEN() (tputs(tgetstr("cl", NULL), 1, ft_putchar_err))
+# define TERMINAL_NA
 
 void			set_win_size(void);
 int				ft_putchar_err(int c);
