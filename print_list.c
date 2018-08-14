@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 15:09:29 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/14 13:24:33 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 16:43:33 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	print_list(void)
 				if (((t_entry *)dup->content)->active)
 					SET_REV_VID();
 				colourise(((t_entry *)dup->content)->mode);
-				ft_printf("%-*s", g_info.list_width,
+				ft_printf_fd(g_tty, "%-*s", g_info.list_width,
 					((t_entry *)dup->content)->name);
 				UNSET_UL_REV_VID();
 				set_style(0);
@@ -82,7 +82,7 @@ void	print_list(void)
 			while (i < cols)
 			{
 				SET_POS(4 + (g_info.list_width + 2) * i, 4 + (j * 2));
-				ft_printf("%-*s", g_info.list_width, "");
+				ft_printf_fd(g_tty, "%-*s", g_info.list_width, "");
 				i++;
 			}
 			j++;

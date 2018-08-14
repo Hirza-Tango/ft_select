@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:53:49 by tango             #+#    #+#             */
-/*   Updated: 2018/08/14 16:12:52 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 16:59:53 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void		init_term(void)
 	const char	*terminal = getenv("TERM");
 	char		findings;
 
+	if (!isatty(2))
+	{
+		ft_putendl_fd("Error: not a tty. Please call from a tty", 2);
+		exit(1);
+	}
+	g_tty = open(ttyname(2), O_RDWR);
 	if (!terminal)
 	{
 		ft_putendl_fd("Error: TERM variable not found", g_tty);
@@ -40,12 +46,11 @@ void		init_term(void)
 	if ((findings = tgetent(NULL, terminal)) != 1)
 	{
 		if (!findings)
-			ft_putendl_fd("Error: No entry for TERM in terminfo database", g_tty);
+			ft_putendl_fd("Error: TERM entry not in terminfo database", g_tty);
 		else if (findings < 0)
 			ft_putendl_fd("Error: Terminfo database could not be found", g_tty);
 		exit(1);
 	}
-	g_tty = open(ttyname(2), O_RDWR);
 	set_win_size();
 	tcgetattr(g_tty, &g_inherit_term);
 	g_term = g_inherit_term;
@@ -59,7 +64,15 @@ void		handle_char(long c)
 {
 	if (c == 10)
 	{
-		//return selections
+		while (g_info.list)
+		{
+			if (((t_entry *)g_info.list->content)->active)
+			{
+				ft_putstr(((t_entry *)g_info.list->content)->name);
+				g_info.list->next ? ft_putchar(' ') : (void)0;
+			}
+			g_info.list = g_info.list->next;
+		}
 		signals(SIGINT);
 	}
 	if (c == 27)
