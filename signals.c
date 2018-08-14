@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 18:21:16 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/14 11:39:07 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 13:57:21 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	parse_signals(void)
 {
-	const int	sigs[6] = {SIGINT, SIGTERM, SIGQUIT, SIGHUP, SIGTSTP, SIGWINCH};
+	const int	sigs[6] = {SIGINT, SIGTERM, SIGQUIT, SIGHUP, SIGWINCH};
 	int			i;
 
 	i = 0;
@@ -25,7 +25,7 @@ void	parse_signals(void)
 void	signals(int sig)
 {
 	if (sig == SIGINT || sig == SIGTERM || sig == SIGQUIT
-	|| sig == SIGHUP || sig == SIGTSTP)
+	|| sig == SIGHUP)
 	{
 		tputs(tgetstr("te", NULL), 1, ft_putchar_err);
 		tputs(tgetstr("ve", NULL), 1, ft_putchar_err);

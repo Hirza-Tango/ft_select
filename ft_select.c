@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:53:49 by tango             #+#    #+#             */
-/*   Updated: 2018/08/14 13:13:32 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 14:04:52 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,20 @@ void		delete(void)
 
 void		init_term(void)
 {
-	if (tgetent(NULL, getenv("TERM")) != 1)
+	const char	*terminal = getenv("TERM");
+	char		findings;
+
+	if (!terminal)
 	{
-		//TODO: more thorough error handling
-		ft_putstr("Error: Could not load entry\n");
+		ft_putendl_fd("Error: TERM variable not found", 2);
+		exit(1);
+	}
+	if ((findings = tgetent(NULL, terminal)) != 1)
+	{
+		if (!findings)
+			ft_putendl_fd("Error: No entry for TERM in terminfo database", 2);
+		else if (findings < 0)
+			ft_putendl_fd("Error: Terminfo database could not be found", 2);
 		exit(1);
 	}
 	set_win_size();

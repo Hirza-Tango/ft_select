@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 17:44:36 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/14 11:37:28 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 13:55:34 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void			set_style(char style)
 {
 	if (ft_strequ(getenv("TERM"), "xterm-256color"))
 	{
-		ft_putstr("\033[");
-		ft_putnbr(style);
-		ft_putchar('m');
+		ft_putstr_fd("\033[", 2);
+		ft_putnbr_fd(style, 2);
+		ft_putchar_fd('m', 2);
 	}
 }
 
