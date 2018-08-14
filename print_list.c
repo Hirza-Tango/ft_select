@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 15:09:29 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/14 12:28:22 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 13:24:33 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,17 @@ void	colourise(mode_t mode)
 void	print_list(void)
 {
 	const size_t	cols = (g_term_cols - 6) / (g_info.list_width + 2);
-	const size_t	rows = (g_term_lines - 7) / g_info.list_length;
+	const size_t	rows = (g_term_lines - 7) / 2;
 	size_t			i;
 	size_t			j;
 	t_list			*dup;
 
 	dup = g_info.list;
 	j = 0;
-	if (cols * rows > g_info.list_length)
-	{
-	}
+	if ((cols * rows) < g_info.list_length)
+		ft_printf("Scrolling is still WIP. Please bear with me");
 	else
+	{
 		while (dup)
 		{
 			i = 0;
@@ -98,4 +98,5 @@ void	print_list(void)
 			}
 			j++;
 		}
+	}
 }

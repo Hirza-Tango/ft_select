@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 16:21:16 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/14 11:38:09 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 13:38:17 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ void	move_up(void)
 	const intmax_t	rows = g_info.list_length / cols + 1;
 
 	if ((intmax_t)g_info.active - cols < 0L)
-		g_info.active = MIN(g_info.active % cols + (rows - 1) * cols,
-			g_info.list_length);
+	{
+		g_info.active = g_info.active % cols + (rows - 1) * cols;
+		if (g_info.active > g_info.list_length - 1)
+			g_info.active -= cols;
+	}
 	else
 		g_info.active -= cols;
 }
@@ -27,11 +30,10 @@ void	move_up(void)
 void	move_down(void)
 {
 	const size_t	cols = (g_term_cols - 6) / (g_info.list_width + 2);
-	const size_t	rows = g_info.list_length / cols + 1;
 
-	if (g_info.active + cols >= g_info.list_length)
-		g_info.active -= rows * cols;
 	g_info.active += cols;
+	if (g_info.active >= g_info.list_length)
+		g_info.active %= cols;
 }
 
 void	move_left(void)
@@ -64,4 +66,5 @@ void	list_toggle(void)
 				((t_entry *)dup->content)->active ^ 1;
 		dup = dup->next;
 	}
+	move_right();
 }

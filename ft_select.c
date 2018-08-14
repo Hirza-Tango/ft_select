@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:53:49 by tango             #+#    #+#             */
-/*   Updated: 2018/08/14 12:19:07 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/14 13:13:32 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void		delete(void)
 {
 	ft_lstrm(&(g_info.list), g_info.active, entry_del);
 	g_info.list_length--;
+	if (!g_info.list_length)
+		signals(SIGTERM);
 	if (g_info.active == g_info.list_length)
 		g_info.active--;
 }
