@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/15 14:27:08 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/15 15:53:54 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ enum			e_font_effects
 # define SET_REV_VID() (tputs(tgetstr("mr", NULL), 1, ft_putchar_err))
 # define UNSET_UL_REV_VID() (tputs(tgetstr("me", NULL), 1, ft_putchar_err))
 # define CLEAR_SCREEN() (tputs(tgetstr("cl", NULL), 1, ft_putchar_err))
-# define TERMINAL_NA
 
 void			set_win_size(void);
 int				ft_putchar_err(int c);
