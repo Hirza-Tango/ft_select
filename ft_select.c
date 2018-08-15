@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:53:49 by tango             #+#    #+#             */
-/*   Updated: 2018/08/14 16:59:53 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/15 14:26:56 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void		delete(void)
 
 void		init_term(void)
 {
-	const char	*terminal = getenv("TERM");
-	char		findings;
+	const char		*terminal = getenv("TERM");
+	char			findings;
+	struct termios	term;
 
 	if (!isatty(2))
 	{
@@ -53,9 +54,10 @@ void		init_term(void)
 	}
 	set_win_size();
 	tcgetattr(g_tty, &g_inherit_term);
-	g_term = g_inherit_term;
-	g_term.c_lflag &= ~(ECHO | ICANON);
-	tcsetattr(g_tty, 0, &g_term);
+	term = g_inherit_term;
+	term.c_lflag &= ~(ECHO | ICANON);
+	term.c_oflag &= ~OPOST;
+	tcsetattr(g_tty, 0, &term);
 	tputs(tgetstr("ti", NULL), 1, ft_putchar_err);
 	tputs(tgetstr("vi", NULL), 1, ft_putchar_err);
 }

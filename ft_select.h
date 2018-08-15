@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/14 14:34:25 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/15 14:27:08 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct	s_listinfo
 }				t_listinfo;
 
 struct termios	g_inherit_term;
-struct termios	g_term;
 size_t			g_term_cols;
 size_t			g_term_lines;
 t_listinfo		g_info;
