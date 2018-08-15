@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 15:09:29 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/15 13:22:20 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/15 14:04:35 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	print_list(void)
 
 	dup = g_info.list;
 	j = 0;
+	if (g_term_cols < 9 || g_term_lines < 8)
+		return ;
 	if ((cols * rows) < g_info.list_length)
 		ft_printf("Scrolling is still WIP. Please bear with me");
 	else

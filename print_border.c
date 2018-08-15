@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 12:01:25 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/14 14:51:14 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/15 14:03:23 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ void	border_left_right(void)
 void	print_border(void)
 {
 	CLEAR_SCREEN();
+	if (g_term_cols < 9 || g_term_lines < 8)
+	{
+		SET_POS(0, 0);
+		ft_putstr_fd("Window is too small. Please resize", g_tty);
+		return ;
+	}
 	SET_POS((g_term_cols - 20) / 2, 2);
 	set_style(F_F_CYAN);
 	SET_UNDERLINE();
