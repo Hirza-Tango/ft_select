@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 15:09:29 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/14 16:43:33 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/15 13:22:20 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	colourise(mode_t mode)
 {
-	const mode_t	type = mode & S_IFMT;
+	const mode_t	type = mode & __S_IFMT;
 
-	if (type == S_IFDIR)
+	if (type == __S_IFDIR)
 	{
 		set_style(F_F_BLACK);
 		if (mode & S_IWOTH)
-			set_style(mode & S_ISTXT ? F_B_YELLOW : F_B_GREEN);
+			set_style(mode & __S_ISVTX ? F_B_YELLOW : F_B_GREEN);
 		else
 			set_style(F_F_BLUE);
 	}
-	else if (type == S_IFREG && mode & S_IXUSR)
+	else if (type == __S_IFREG && mode & S_IXUSR)
 	{
 		set_style(F_F_BLACK);
 		if (mode & S_ISGID)
@@ -34,16 +34,16 @@ void	colourise(mode_t mode)
 		else
 			set_style(F_F_RED);
 	}
-	else if (type == S_IFCHR || type == S_IFBLK)
+	else if (type == __S_IFCHR || type == __S_IFBLK)
 	{
 		set_style(F_F_BLUE);
-		set_style(type == S_IFCHR ? F_B_CYAN : F_B_YELLOW);
+		set_style(type == __S_IFCHR ? F_B_CYAN : F_B_YELLOW);
 	}
-	else if (type == S_IFIFO)
+	else if (type == __S_IFIFO)
 		set_style(F_F_YELLOW);
-	else if (type == S_IFSOCK)
+	else if (type == __S_IFSOCK)
 		set_style(F_F_GREEN);
-	else if (type == S_IFLNK)
+	else if (type == __S_IFLNK)
 		set_style(F_F_MAGENTA);
 }
 
