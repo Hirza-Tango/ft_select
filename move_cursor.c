@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 16:21:16 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/14 13:38:17 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/16 14:26:59 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,4 @@ void	move_right(void)
 		g_info.active = 0;
 	else
 		g_info.active++;
-}
-
-void	list_toggle(void)
-{
-	size_t			i;
-	t_list			*dup;
-
-	i = 0;
-	dup = g_info.list;
-	while (dup)
-	{
-		if (i++ == g_info.active)
-			((t_entry *)dup->content)->active =
-				((t_entry *)dup->content)->active ^ 1;
-		dup = dup->next;
-	}
-	move_right();
 }

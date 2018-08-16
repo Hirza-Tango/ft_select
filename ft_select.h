@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/16 13:00:30 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/16 14:33:26 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,15 @@ void			set_win_size(void);
 int				ft_putchar_err(int c);
 void			set_style(char style);
 void			init_term(void);
-void			print_border(void);
+void			display_border(void);
 void			parse_signals(void);
 void			signals(int sig);
 unsigned char	ft_listwidth(t_list *list);
-void			print_list(void);
+void			display_list(void);
+t_listinfo		init_list(int argc, char **argv);
 void			list_toggle(void);
+void			list_print(void);
+int				reset_term(void);
 
 void			move_up(void);
 void			move_down(void);

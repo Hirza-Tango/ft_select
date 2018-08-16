@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 17:44:36 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/14 14:48:59 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/16 15:27:10 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,16 @@ void			set_win_size(void)
 {
 	struct winsize	w;
 
-	ioctl(g_tty, TIOCGWINSZ, &w);
-	g_term_cols = w.ws_col;
-	g_term_lines = w.ws_row;
+	if (ioctl(g_tty, TIOCGWINSZ, &w) == -1)
+	{
+		g_term_cols = tgetnum("co");
+		g_term_lines = tgetnum("li");
+	}
+	else
+	{
+		g_term_cols = w.ws_col;
+		g_term_lines = w.ws_row;
+	}
 }
 
 int				ft_putchar_err(int c)

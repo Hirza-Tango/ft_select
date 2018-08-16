@@ -6,18 +6,18 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:53:49 by tango             #+#    #+#             */
-/*   Updated: 2018/08/15 14:26:56 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/16 14:29:57 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-void		entry_del(void *content, size_t size)
+static void	entry_del(void *content, size_t size)
 {
 	(void)(content && size);
 }
 
-void		delete(void)
+static void	delete(void)
 {
 	ft_lstrm(&(g_info.list), g_info.active, entry_del);
 	g_info.list_length--;
@@ -27,55 +27,13 @@ void		delete(void)
 		g_info.active--;
 }
 
-void		init_term(void)
-{
-	const char		*terminal = getenv("TERM");
-	char			findings;
-	struct termios	term;
-
-	if (!isatty(2))
-	{
-		ft_putendl_fd("Error: not a tty. Please call from a tty", 2);
-		exit(1);
-	}
-	g_tty = open(ttyname(2), O_RDWR);
-	if (!terminal)
-	{
-		ft_putendl_fd("Error: TERM variable not found", g_tty);
-		exit(1);
-	}
-	if ((findings = tgetent(NULL, terminal)) != 1)
-	{
-		if (!findings)
-			ft_putendl_fd("Error: TERM entry not in terminfo database", g_tty);
-		else if (findings < 0)
-			ft_putendl_fd("Error: Terminfo database could not be found", g_tty);
-		exit(1);
-	}
-	set_win_size();
-	tcgetattr(g_tty, &g_inherit_term);
-	term = g_inherit_term;
-	term.c_lflag &= ~(ECHO | ICANON);
-	term.c_oflag &= ~OPOST;
-	tcsetattr(g_tty, 0, &term);
-	tputs(tgetstr("ti", NULL), 1, ft_putchar_err);
-	tputs(tgetstr("vi", NULL), 1, ft_putchar_err);
-}
-
 void		handle_char(long c)
 {
 	if (c == 10)
 	{
-		while (g_info.list)
-		{
-			if (((t_entry *)g_info.list->content)->active)
-			{
-				ft_putstr(((t_entry *)g_info.list->content)->name);
-				g_info.list->next ? ft_putchar(' ') : (void)0;
-			}
-			g_info.list = g_info.list->next;
-		}
-		signals(SIGINT);
+		reset_term();
+		list_print();
+		exit(0);
 	}
 	if (c == 27)
 		signals(SIGINT);
@@ -93,44 +51,17 @@ void		handle_char(long c)
 		list_toggle();
 }
 
-t_listinfo	init_list(int argc, char **argv)
-{
-	t_list		*list;
-	struct stat	s;
-	t_listinfo	info;
-	t_entry		ent;
-
-	list = NULL;
-	while (--argc)
-	{
-		ent.name = argv[argc];
-		ent.mode = lstat(argv[argc], &s) == -1 ? 0 : s.st_mode;
-		ent.active = 0;
-		ft_lstadd(&list, ft_lstnew(&ent, sizeof(ent)));
-	}
-	if (!list)
-	{
-		ft_putendl("No arguments given");
-		exit(0);
-	}
-	info.active = 0;
-	info.list = list;
-	info.list_length = ft_lstlen(list);
-	info.list_width = ft_listwidth(list);
-	return (info);
-}
-
 int			main(int argc, char **argv)
 {
 	long		input;
 
 	g_info = init_list(argc, argv);
 	init_term();
-	print_border();
+	display_border();
 	parse_signals();
 	while (1)
 	{
-		print_list();
+		display_list();
 		input = 0;
 		read(g_tty, &input, 8);
 		handle_char(input);

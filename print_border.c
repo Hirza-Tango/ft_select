@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 12:01:25 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/15 14:03:23 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/16 14:31:40 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	border_left_right(void)
 	}
 }
 
-void	print_border(void)
+void	display_border(void)
 {
 	CLEAR_SCREEN();
 	if (g_term_cols < 9 || g_term_lines < 8)
