@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 14:25:31 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/16 14:30:56 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/16 15:46:34 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,18 @@ void		list_toggle(void)
 
 void		list_print(void)
 {
+	int i;
+
+	i = 0;
 	while (g_info.list)
 	{
 		if (((t_entry *)g_info.list->content)->active)
 		{
+			if (i)
+				ft_putchar(' ');
+			else
+				i = 1;
 			ft_putstr(((t_entry *)g_info.list->content)->name);
-			g_info.list->next ? ft_putchar(' ') : (void)0;
 		}
 		g_info.list = g_info.list->next;
 	}

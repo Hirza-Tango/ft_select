@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 13:54:51 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/16 14:33:12 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/16 15:41:31 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	init_error(int tty)
 		ft_putendl_fd("Error: TERM variable not found", 2);
 		exit(1);
 	}
-	if (!isatty(g_tty))
+	if (!isatty(tty))
 	{
 		ft_putendl_fd("Error: not a tty. Please call from a tty", 2);
 		exit(1);
@@ -30,9 +30,9 @@ static void	init_error(int tty)
 	if ((findings = tgetent(NULL, terminal)) != 1)
 	{
 		if (!findings)
-			ft_putendl_fd("Error: TERM entry not in terminfo database", g_tty);
+			ft_putendl_fd("Error: TERM entry not in terminfo database", tty);
 		else if (findings < 0)
-			ft_putendl_fd("Error: Terminfo database could not be found", g_tty);
+			ft_putendl_fd("Error: Terminfo database could not be found", tty);
 		exit(1);
 	}
 }
