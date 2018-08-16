@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:41:42 by tango             #+#    #+#             */
-/*   Updated: 2018/08/15 15:53:54 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/16 13:00:30 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@
 # include <signal.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+
+# ifdef __APPLE__
+#  define __S_IFMT S_IFMT
+#  define __S_IFDIR S_IFDIR
+#  define __S_ISVTX S_ISVTX
+#  define __S_IFREG S_IFREG
+#  define __S_IFCHR S_IFCHR
+#  define __S_IFBLK S_IFBLK
+#  define __S_IFIFO S_IFIFO
+#  define __S_IFSOCK S_IFSOCK
+#  define __S_IFLNK S_IFLNK
+# endif
 
 typedef struct	s_entry
 {
