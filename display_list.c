@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 15:09:29 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/16 15:24:09 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/16 16:45:00 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void		colourise(mode_t mode)
 	(mode & __S_IFMT) == __S_IFIFO ? set_style(F_F_YELLOW) : (void)0;
 	(mode & __S_IFMT) == __S_IFSOCK ? set_style(F_F_GREEN) : (void)0;
 	(mode & __S_IFMT) == __S_IFLNK ? set_style(F_F_MAGENTA) : (void)0;
+	mode ? (void)0 : set_style(-1);
 }
 
 static t_list	*print_row(int j, t_list *list)

@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 17:44:36 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/16 15:27:10 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/16 16:46:16 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@ void			set_style(char style)
 {
 	if (ft_strequ(getenv("TERM"), "xterm-256color"))
 	{
-		ft_putstr_fd("\033[", g_tty);
-		ft_putnbr_fd(style, g_tty);
-		ft_putchar_fd('m', g_tty);
+		if (style == -1)
+			ft_putstr_fd("\033[30;1m", g_tty);
+		else
+		{
+			ft_putstr_fd("\033[", g_tty);
+			ft_putnbr_fd(style, g_tty);
+			ft_putchar_fd('m', g_tty);
+		}
 	}
 }
 
