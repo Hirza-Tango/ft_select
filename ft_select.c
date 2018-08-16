@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 19:53:49 by tango             #+#    #+#             */
-/*   Updated: 2018/08/16 14:29:57 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/16 16:31:20 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	delete(void)
 {
 	ft_lstrm(&(g_info.list), g_info.active, entry_del);
 	g_info.list_length--;
-	if (!g_info.list_length)
+	if (!g_info.list_length || !(g_info.list))
 		signals(SIGTERM);
 	if (g_info.active == g_info.list_length)
 		g_info.active--;
@@ -57,8 +57,8 @@ int			main(int argc, char **argv)
 
 	g_info = init_list(argc, argv);
 	init_term();
-	display_border();
 	parse_signals();
+	display_border();
 	while (1)
 	{
 		display_list();
